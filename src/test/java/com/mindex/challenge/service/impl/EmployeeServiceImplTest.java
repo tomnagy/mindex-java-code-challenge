@@ -1,6 +1,8 @@
 package com.mindex.challenge.service.impl;
 
+import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
+import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.service.EmployeeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +17,13 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -24,6 +33,7 @@ public class EmployeeServiceImplTest {
 
     private String employeeUrl;
     private String employeeIdUrl;
+    private String reportingStructureUrl;
 
     @Autowired
     private EmployeeService employeeService;
@@ -38,6 +48,7 @@ public class EmployeeServiceImplTest {
     public void setup() {
         employeeUrl = "http://localhost:" + port + "/employee";
         employeeIdUrl = "http://localhost:" + port + "/employee/{id}";
+        reportingStructureUrl = "http://localhost:" + port + "/employee/{id}/reporting-structure";
     }
 
     @Test
@@ -75,6 +86,17 @@ public class EmployeeServiceImplTest {
                         readEmployee.getEmployeeId()).getBody();
 
         assertEmployeeEquivalence(readEmployee, updatedEmployee);
+    }
+
+    @Test
+    public void testReadReportingStructure() {
+        String testEmployeeId = "16a596ae-edd3-4847-99fe-c4518e82c86f";
+        int expectedDirectReports = 4;
+
+        // Read checks
+        ReportingStructure readReportingStructure = restTemplate.getForEntity(reportingStructureUrl, ReportingStructure.class, testEmployeeId).getBody();
+        assertEquals(testEmployeeId, readReportingStructure.getEmployee().getEmployeeId());
+        assertEquals(expectedDirectReports, readReportingStructure.getNumberOfReports());
     }
 
     private static void assertEmployeeEquivalence(Employee expected, Employee actual) {

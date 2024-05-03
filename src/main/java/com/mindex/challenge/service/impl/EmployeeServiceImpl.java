@@ -7,7 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.UUID;
+
+import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -45,5 +46,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         LOG.debug("Updating employee [{}]", employee);
 
         return employeeRepository.save(employee);
+    }
+
+    public int countDirectReports(String id) {
+        int reportCount = 0;
+        Queue<Employee> queue = new LinkedList<>();
+        Employee current = read(id);
+        while(current != null) {
+            List<Employee> directReports = current.getDirectReports();
+            if (directReports != null) {
+                reportCount += directReports.size();;
+                directReports.stream()
+                        .map(directReport -> read(directReport.getEmployeeId()))
+                        .forEach(queue::add);
+            }
+            current = queue.poll();
+        }
+        return reportCount;
     }
 }
