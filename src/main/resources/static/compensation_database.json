@@ -1,0 +1,43 @@
+[
+  {
+    "compensationId" : "aaa596ae-edd3-4847-99fe-c4518e82c86f",
+    "employee" : {
+        "employeeId" : "16a596ae-edd3-4847-99fe-c4518e82c86f"
+    },
+    "salary" : 123.10,
+    "effectiveDate" : "2001-01-01"
+  },
+  {
+    "compensationId" : "bbb39309-3348-463b-a7e3-5de1c168beb3",
+    "employee" : {
+      "employeeId" : "b7839309-3348-463b-a7e3-5de1c168beb3"
+    },
+    "salary" : 123.20,
+    "effectiveDate" : "2002-02-02"
+  },
+  {
+    "compensationId" : "ccca1462-ffa9-4978-901b-7c001562cf6f",
+    "employee" : {
+      "employeeId" : "03aa1462-ffa9-4978-901b-7c001562cf6f"
+    },
+    "salary" : 123.30,
+    "effectiveDate" : "2003-03-03"
+  },
+  {
+    "compensationId" : "ddd1084e-6e34-4630-93fd-9153afb65309",
+    "employee" : {
+      "employeeId" : "62c1084e-6e34-4630-93fd-9153afb65309"
+    },
+    "salary" : 123.40,
+    "effectiveDate" : "2004-04-04"
+  },
+
+  {
+    "compensationId" : "eee2293d-16bd-4603-8e08-638a9d18b22c",
+    "employee" : {
+      "employeeId" : "c0c2293d-16bd-4603-8e08-638a9d18b22c"
+    },
+    "salary" : 123.50,
+    "effectiveDate" : "2005-05-05"
+  }
+]
